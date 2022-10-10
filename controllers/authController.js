@@ -4,9 +4,9 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
-  const { email, username, password, country, city, phone } = req.body;
+  const { email, username, password, country, city, phone } = await req.body;
   const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(password, salt);
+  const hash =  bcrypt.hashSync(password, salt);
 
   if (!email || !username || !password || !country || !city || !phone) {
     return next(createError(404, "All field is required"));
@@ -52,11 +52,13 @@ export const loginUser = async (req, res, next) => {
   }
 
   try {
+    //check for user
     const user = await UserModel.findOne({ email });
     if (!user) {
       return next(createError(401, "User not found!"));
     }
 
+    //check if password is correct
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
       user.password

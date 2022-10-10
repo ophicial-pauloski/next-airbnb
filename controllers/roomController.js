@@ -1,5 +1,4 @@
 import { RoomModel } from "../models/Room.js";
-import { RoomModel } from "../models/room.js";
 
 export const createRoom = async (req, res, next) => {
   const roomId = req.params.roomId;

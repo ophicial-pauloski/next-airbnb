@@ -29,7 +29,7 @@ export const deleteUser = async (req, res, next) => {
 // ********************* Get all Users ***************//
 export const getAllUsers = async (req, res, next) => {
   try {
-    const Users = await UserModel.find();
+    const Users = await UserModel.find().select("-password");
     res.status(200).json(Users);
   } catch (error) {
     next(error);

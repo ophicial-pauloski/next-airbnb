@@ -27,5 +27,5 @@ app.use(errorMiddleWare);
 
 app.listen(port, (req, res) => {
   db_connection();
-  console.log("connecting to port " + port);
+  console.log("Server started on port " + port);
 });

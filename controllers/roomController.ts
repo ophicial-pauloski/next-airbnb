@@ -1,7 +1,12 @@
 import { HotelModel } from "../models/hotel";
 import { RoomModel } from "../models/Room";
+import { Request, Response, NextFunction } from "express";
 
-export const createRoom = async (req, res, next) => {
+export const createRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const hotelId = req.params.id;
   const newRoom = new RoomModel(req.body);
 
@@ -27,7 +32,11 @@ export const createRoom = async (req, res, next) => {
 };
 
 // ******** Update Room *********//
-export const updateRoom = async (req, res, next) => {
+export const updateRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const updatedRoom = await RoomModel.findByIdAndUpdate(
       req.params.id,
@@ -42,7 +51,11 @@ export const updateRoom = async (req, res, next) => {
 // *******************************************************//
 
 // *********** Delete Room ***********//
-export const deleteRoom = async (req, res, next) => {
+export const deleteRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     await RoomModel.findByIdAndDelete(req.params.id);
 
@@ -61,7 +74,11 @@ export const deleteRoom = async (req, res, next) => {
 // *******************************************************//
 
 // ********************* Get all Rooms ***************//
-export const getAllRooms = async (req, res, next) => {
+export const getAllRooms = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const Rooms = await RoomModel.find();
     res.status(200).json(Rooms);
@@ -72,7 +89,11 @@ export const getAllRooms = async (req, res, next) => {
 // *******************************************************//
 
 // ************************** Get Room By Id ********************//
-export const getRoomById = async (req, res, next) => {
+export const getRoomById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const getRoom = await RoomModel.findById(req.params.id);
     res.status(200).json(getRoom);

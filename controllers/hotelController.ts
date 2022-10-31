@@ -1,7 +1,12 @@
 import { HotelModel } from "../models/hotel";
+import { Request, Response, NextFunction } from "express";
 
 // *************************Create Hotel **************************//
-export const createHotel = async (req, res, next) => {
+export const createHotel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const newHotel = new HotelModel(req.body);
 
   try {
@@ -14,7 +19,11 @@ export const createHotel = async (req, res, next) => {
 // *******************************************************//
 
 // ******** Update Hotel *********//
-export const updateHotel = async (req, res, next) => {
+export const updateHotel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const updatedHotel = await HotelModel.findByIdAndUpdate(
       req.params.id,
@@ -29,7 +38,11 @@ export const updateHotel = async (req, res, next) => {
 // *******************************************************//
 
 // *********** Delete Hotel ***********//
-export const deleteHotel = async (req, res, next) => {
+export const deleteHotel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     await HotelModel.findByIdAndDelete(req.params.id);
     res.status(200).json("Hotel deleted successfully");
@@ -40,7 +53,11 @@ export const deleteHotel = async (req, res, next) => {
 // *******************************************************//
 
 // ********************* Get all Hotels ***************//
-export const getAllHotels = async (req, res, next) => {
+export const getAllHotels = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const hotels = await HotelModel.find();
     res.status(200).json(hotels);
@@ -51,7 +68,11 @@ export const getAllHotels = async (req, res, next) => {
 // *******************************************************//
 
 // ************************** Get Hotel By Id ********************//
-export const getHotelById = async (req, res, next) => {
+export const getHotelById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const getHotel = await HotelModel.findById(req.params.id);
     res.status(200).json(getHotel);

@@ -1,7 +1,12 @@
 import { UserModel } from "../models/user";
+import { Request, Response, NextFunction } from "express";
 
 // ******** Update User *********//
-export const updateUser = async (req, res, next) => {
+export const updateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const updatedUser = await UserModel.findByIdAndUpdate(
       req.params.id,
@@ -16,7 +21,7 @@ export const updateUser = async (req, res, next) => {
 // *******************************************************//
 
 // *********** Delete User ***********//
-export const deleteUser = async (req, res, next) => {
+export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await UserModel.findByIdAndDelete(req.params.id);
     res.status(200).json("User deleted successfully");
@@ -27,7 +32,7 @@ export const deleteUser = async (req, res, next) => {
 // *******************************************************//
 
 // ********************* Get all Users ***************//
-export const getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const Users = await UserModel.find().select("-password");
     res.status(200).json(Users);
@@ -38,7 +43,7 @@ export const getAllUsers = async (req, res, next) => {
 // *******************************************************//
 
 // ************************** Get User By Id ********************//
-export const getUserById = async (req, res, next) => {
+export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const getUser = await UserModel.findById(req.params.id);
     res.status(200).json(getUser);

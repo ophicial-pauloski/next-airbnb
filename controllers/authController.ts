@@ -1,12 +1,18 @@
-import { UserModel } from "../models/user.js";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { UserModel } from "../models/user";
 import bcrypt from "bcryptjs";
-import { createError } from "../utils/error.js";
+import { createError } from "../utils/error";
 import jwt from "jsonwebtoken";
+import { NextFunction, Request, Response } from "express";
 
-export const register = async (req, res, next) => {
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { email, username, password, country, city, phone } = await req.body;
   const salt = bcrypt.genSaltSync(10);
-  const hash =  bcrypt.hashSync(password, salt);
+  const hash = bcrypt.hashSync(password, salt);
 
   if (!email || !username || !password || !country || !city || !phone) {
     return next(createError(404, "All field is required"));
@@ -32,7 +38,7 @@ export const register = async (req, res, next) => {
     await newUser.save();
 
     if (newUser) {
-      const { password, ...data } = newUser._doc; //exclude password
+      const { password, ...data } = newUser["_doc"]; //exclude password
       res.status(201).json({
         message: "user created Successfully",
         success: true,
@@ -45,7 +51,11 @@ export const register = async (req, res, next) => {
 };
 
 // login user
-export const loginUser = async (req, res, next) => {
+export const loginUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return next(createError(404, "provide all fields"));
@@ -70,7 +80,7 @@ export const loginUser = async (req, res, next) => {
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SECRET
     );
-    const { password, isAdmin, ...data } = user._doc;
+    const { password, isAdmin, ...data } = user["_doc"];
     res
       .cookie("access_token", token, {
         httpOnly: true,

@@ -1,18 +1,16 @@
 import express from "express";
-import dotenv from "dotenv";
-import { db_connection } from "./config/database.js";
-import auth_route from "./routes/auth.js";
-import { hotelRoute } from "./routes/hotel.js";
-import { roomRoute } from "./routes/rooms.js";
-import { userRoute } from "./routes/users.js";
+import "dotenv/config";
+import { db_connection } from "./config/database";
+import auth_route from "./routes/auth";
+import { hotelRoute } from "./routes/hotel";
+import { roomRoute } from "./routes/rooms";
+import { userRoute } from "./routes/users";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { errorMiddleWare } from "./middleware/error.middleware.js";
-
-dotenv.config();
+import { errorMiddleWare } from "./middleware/error.middleware";
 
 const app = express();
-const port = 2000;
+const port = 5000;
 
 //middlewares
 app.use(cookieParser());
@@ -25,7 +23,7 @@ app.use("/api/user", userRoute);
 
 app.use(errorMiddleWare);
 
-app.listen(port, (req, res) => {
+app.listen(port, () => {
   db_connection();
   console.log("Server started on port " + port);
 });

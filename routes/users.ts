@@ -3,13 +3,13 @@ import {
   verifyAdmin,
   verifyToken,
   verifyUser,
-} from "./../utils/verifyToken.js";
+} from "../utils/verifyToken";
 import {
   deleteUser,
   getAllUsers,
   getUserById,
   updateUser,
-} from "../controllers/userController.js";
+} from "../controllers/userController";
 
 export const userRoute = express.Router();
 

@@ -1,4 +1,4 @@
-import { HotelModel } from "../models/hotel.js";
+import { HotelModel } from "../models/hotel";
 
 // *************************Create Hotel **************************//
 export const createHotel = async (req, res, next) => {
